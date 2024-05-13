@@ -13,7 +13,7 @@ export default {
   <br />
   <div class="container">
     <div class="search-view">
-      <h2>좌표 클릭, 생성</h2>
+      <h3 style="font-family: 'neon'">좌표 클릭과 생성<br />구현 예정</h3>
     </div>
     <KakaoMap class="kakao-map" />
   </div>

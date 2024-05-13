@@ -1,5 +1,102 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import axios from "axios";
 
-<template></template>
+const route = useRoute();
+const router = useRouter();
+const boardId = ref(route.params.boardId);
+console.log(boardId.value);
 
-<style scoped></style>
+const title = ref("");
+const content = ref("");
+
+const fetchArticle = () => {
+  axios
+    .get(`http://localhost/api/board/${boardId.value}`)
+    .then((response) => {
+      const { title: fetchedTitle, content: fetchedContent } = response.data;
+      title.value = fetchedTitle;
+      content.value = fetchedContent;
+    })
+    .catch((error) => console.error("게시글 정보 불러오기 에러:", error));
+};
+
+fetchArticle();
+
+const modifyArticle = () => {
+  const addr = "http://localhost/api/board/" + boardId.value;
+
+  // 데이터를 요청 본문에 포함시켜 PUT 요청을 보냅니다.
+  axios
+    .put(addr, {
+      boardId: boardId.value,
+      userId: "ssafy",
+      title: title.value,
+      content: content.value,
+    })
+    .then(() => {
+      axios.get(addr).then((response) => {
+        console.log("글 수정 후 확인!!");
+        console.log(response);
+        moveList(); // 수정 성공 후 리스트 페이지로 이동
+      });
+    })
+    .catch((error) => console.error("게시글 수정 에러:", error));
+};
+
+function moveList() {
+  router.replace({ name: "board-list" });
+}
+</script>
+
+<template>
+  <div class="container" style="margin-top: 50px">
+    <div class="row">
+      <div class="" style="width: 1200px; border: 3px solid lightgray; border-radius: 10px">
+        <div class="form-head" style="margin: 20px">
+          <br />
+          <h4 class="title" style="font-size: 25px">게시글 수정하기</h4>
+          <br />
+          <table>
+            <tr>
+              <th>글번호</th>
+              <td><input type="text" :value="boardId" readonly style="color: gray" /></td>
+            </tr>
+            <tr>
+              <th>제목</th>
+              <td><input type="text" v-model="title" /></td>
+            </tr>
+            <tr>
+              <th>작성자</th>
+              <td>
+                <input type="text" name="writer" value="ssafy" readonly style="color: gray" />
+              </td>
+            </tr>
+            <tr>
+              <th>내용</th>
+              <td><textarea v-model="content" rows="7" cols="80"></textarea></td>
+              <td></td>
+            </tr>
+          </table>
+          <div>
+            <button type="submit" @click="modifyArticle">수정하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+button {
+  font-size: 17px;
+  float: right;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #00bcd4;
+  background-color: rgb(246, 246, 246);
+  cursor: pointer;
+  border: none;
+}
+</style>

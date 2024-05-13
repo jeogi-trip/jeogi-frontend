@@ -18,6 +18,10 @@
 <style>
 @charset "UTF-8";
 
+* {
+  font-family: "neon";
+}
+
 body {
   padding: 1.5em;
   background: #f5f5f5;

@@ -6,13 +6,9 @@ defineProps({ article: Object });
   <tr class="text-start">
     <td scope="">{{ article.boardId }}</td>
     <td class="text-start">
-      <!-- <router-link
-        :to="{ name: 'article-view', params: { articleno: article.boardId } }"
-        class="article-title link-dark"
-      >
+      <router-link :to="{ name: 'board-detail', params: { boardId: article.boardId } }" class="article-title link-dark">
         {{ article.title }}
-      </router-link> -->
-      {{ article.title }}
+      </router-link>
     </td>
     <td>{{ article.userId }}</td>
     <td>{{ article.viewCount }}</td>

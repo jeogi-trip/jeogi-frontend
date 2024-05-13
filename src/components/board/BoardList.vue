@@ -38,34 +38,6 @@ onMounted(() => {
     });
 });
 
-const changeKey = (val) => {
-  console.log("BoarList에서 선택한 조건 : " + val);
-  param.value.key = val;
-};
-
-const getArticleList = () => {
-  console.log("서버에서 글목록 얻어오자!!!", param.value);
-  listArticle(
-    param.value,
-    ({ data }) => {
-      console.log(data);
-      articles.value = data.articles;
-      //   currentPage.value = data.currentPage;
-      //   totalPage.value = data.totalPageCount;
-    },
-    (error) => {
-      console.log(error);
-    }
-  );
-};
-
-const onPageChange = (val) => {
-  console.log(val + "번 페이지로 이동 준비 끝!!!");
-  currentPage.value = val;
-  param.value.pgno = val;
-  getArticleList();
-};
-
 const moveWrite = () => {
   router.push({ name: "article-write" });
 };
@@ -100,16 +72,16 @@ const moveWrite = () => {
                   </c:forEach> -->
           </table>
 
-          <c:choose>
-            <c:when test="${not empty sessionScope.member}">
-              <RouterLink
-                class="nav-link"
-                :to="{ name: 'board-write' }"
-                style="font-size: 17px; float: right; margin: 10px; color: #00bcd4"
-                >등록하기</RouterLink
-              >
-            </c:when>
-          </c:choose>
+          <!-- <c:choose> -->
+          <!-- <c:when test="${not empty sessionScope.member}"> -->
+          <RouterLink
+            class="nav-link"
+            :to="{ name: 'board-write' }"
+            style="font-size: 17px; float: right; margin: 10px; color: #00bcd4"
+            >등록하기</RouterLink
+          >
+          <!-- </c:when> -->
+          <!-- </c:choose> -->
           <br />
         </div>
       </div>
