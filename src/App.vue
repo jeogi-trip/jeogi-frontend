@@ -26,7 +26,7 @@ import Footer from "@/views/Footer.vue";
 
 @font-face {
   font-family: "neon";
-  src: url("./src/Jalnan2TTF.ttf") format("truetype");
+  src: url("@/Jalnan2TTF.ttf") format("truetype");
 }
 
 * {

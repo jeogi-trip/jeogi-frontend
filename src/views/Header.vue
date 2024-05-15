@@ -23,7 +23,7 @@
                 <span class="lni-menu"></span>
               </button>
               <RouterLink to="/" class="navbar-brand">
-                <img src="../assets/img/logo.png" style="height: 40px" alt="로고" />
+                <img src="../assets/img/logo.png" style="height: 40px; width: 130px" alt="로고" />
               </RouterLink>
             </div>
             <div class="collapse navbar-collapse" id="main-navbar">
