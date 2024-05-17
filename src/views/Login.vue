@@ -55,7 +55,7 @@ const moveMain = () => {
             <br />
             <ul class="row form-links justify-content-center">
               <p class="text-center" style="font-family: 'neon'">
-                계정이 없으신가요? &nbsp;&nbsp;&nbsp;<a href="register.html">회원가입하기</a>
+                계정이 없으신가요? &nbsp;&nbsp;&nbsp;<router-link to="/regist">회원가입하기</router-link>
               </p>
             </ul>
           </div>

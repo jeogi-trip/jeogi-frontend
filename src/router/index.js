@@ -7,6 +7,7 @@ import Notice from "@/views/Notice.vue";
 import Board from "@/views/Board.vue";
 import Login from "@/views/Login.vue";
 import Promise from "@/views/Promise.vue";
+import Regist from "@/views/Regist.vue";
 import Result from "@/components/main/SearchResult.vue";
 
 const router = createRouter({
@@ -32,6 +33,11 @@ const router = createRouter({
       path: "/login",
       name: "login",
       component: Login,
+    },
+    {
+      path: "/regist",
+      name: "regist",
+      component: Regist,
     },
     {
       path: "/promise",

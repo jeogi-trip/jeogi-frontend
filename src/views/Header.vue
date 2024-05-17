@@ -78,6 +78,9 @@
                 <li class="nav-item" :class="{ active: $route.path === '/login' }">
                   <RouterLink class="nav-link" to="/login">로그인</RouterLink>
                 </li>
+                <li class="nav-item" :class="{ active: $route.path === '/regist' }">
+                  <RouterLink class="nav-link" to="/regist">회원가입</RouterLink>
+                </li>
 
                 <!-- <li class="button-group">
                   <a href="login.html" class="button btn btn-common" style="margin-right: 5px">로그인</a>
@@ -304,5 +307,10 @@
 <style scoped>
 * {
   font-family: "neon";
+}
+
+.navbar-nav .nav-item {
+  margin-right: -3px; /* 오른쪽 간격을 줄임 */
+  margin-left: -3px; /* 왼쪽 간격을 줄임 */
 }
 </style>
