@@ -6,7 +6,8 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="inner-header">
-            <h3 style="font-family: 'neon'">자유게시판</h3>
+            <p style="color: black; font-size: 30px; font-family: 'neon'">자유게시판</p>
+            <p style="color: black; font-family: 'neon'">누구나 게시판을 이용할 수 있어요~</p>
           </div>
         </div>
       </div>

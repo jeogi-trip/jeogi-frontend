@@ -96,17 +96,20 @@ export default {
   <br />
   <div class="container">
     <div class="search-view">
-      <p style="color: black; font-size: 25px; margin-top: 10px; font-family: 'neon'">좌표를 생성해주세요</p>
-      <button @click="addMarker">좌표 추가</button>
+      <p style="color: black; font-size: 30px; margin-top: 10px; font-family: 'neon'">약속잡기!</p>
+      <p style="color: black; font-family: 'neon'">어디서 만날지 모르겠다면?!</p>
+      <p style="color: black; font-size: 20px; margin-top: 10px; font-family: 'neon'">좌표를 생성해주세요</p>
+      <button @click="addMarker" style="font-size: 15px">좌표 추가</button>
+      <hr style="margin: 0px" />
       <ul>
         <li v-for="(coordinate, index) in coordinates" :key="index">
-          <hr />
-          좌표 {{ index + 1 }} &nbsp;<button @click="removeMarker(index)">삭제</button><br />
+          좌표 {{ index + 1 }} &nbsp;<button style="font-size: 15px" @click="removeMarker(index)">삭제</button><br />
           위도 {{ coordinate.latitude.toFixed(6) }}, 경도 {{ coordinate.longitude.toFixed(6) }}
         </li>
+        <hr style="margin: 0px" />
       </ul>
-      <hr />
-      <button @click="centerMapOnAverage">가운데로 모여라!</button>
+
+      <button @click="centerMapOnAverage" style="font-size: 15px">가운데로 모여라!</button>
       <p style="font-family: 'neon'" v-if="averageLat && averageLng">
         평균 위도: {{ averageLat.toFixed(6) }}<br />
         평균 경도: {{ averageLng.toFixed(6) }}

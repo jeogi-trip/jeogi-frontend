@@ -6,7 +6,8 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="inner-header">
-            <h3 style="font-family: 'neon'">공지사항</h3>
+            <p style="color: black; font-size: 30px; font-family: 'neon'">공지사항</p>
+            <p style="color: black; font-family: 'neon'">회원이라면 필독!!</p>
           </div>
         </div>
       </div>

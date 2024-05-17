@@ -13,7 +13,8 @@ const moveMain = () => {
       <div class="row">
         <div class="col-lg-12">
           <div class="inner-header">
-            <h3 style="font-family: 'neon'">로그인</h3>
+            <p style="color: black; font-size: 30px; font-family: 'neon'">로그인</p>
+            <p style="color: black; font-family: 'neon'">저기어때에 오신 것을 환영합니다 ^_^</p>
           </div>
         </div>
       </div>
@@ -25,7 +26,7 @@ const moveMain = () => {
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-6 col-xs-12">
           <div class="page-login-form box">
-            <h3>로그인</h3>
+            <h3 style="font-family: 'neon'">로그인</h3>
             <form class="login-form">
               <div class="form-group">
                 <div class="input-icon">
