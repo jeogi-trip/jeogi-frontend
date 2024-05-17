@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 
@@ -42,6 +42,15 @@ const fetchSearchResults = async () => {
   }
 };
 
+const firstTwoWordsOfAddr1 = computed(() => {
+  if (searchResults.value.length > 0) {
+    const addr1 = searchResults.value[0].addr1;
+    const words = addr1.split(" ");
+    return words.slice(0, 2).join(" ");
+  }
+  return "";
+});
+
 onMounted(() => {
   fetchSearchResults();
 });
@@ -50,7 +59,9 @@ onMounted(() => {
 <template>
   <div class="search-results">
     <br />
-    <h2>검색 결과</h2>
+    <div v-if="!loading && !error && searchResults.length > 0">
+      <p style="color: black; font-size: 30px">{{ firstTwoWordsOfAddr1 }} 검색 결과</p>
+    </div>
     <div v-if="loading">로딩 중...</div>
     <div v-if="error">에러 발생: {{ error.message }}</div>
     <!-- <ul v-if="!loading && !error">

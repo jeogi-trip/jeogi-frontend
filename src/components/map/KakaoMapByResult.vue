@@ -1,4 +1,6 @@
 <script>
+import axios from "axios";
+
 export default {
   name: "KakaoMap2",
   props: {
@@ -9,8 +11,18 @@ export default {
       map: null,
       markers: [],
       showModal: false, // 모달창 표시 여부
-      modalContent: { title: "", firstImage: "", contentId: "", contentTypeId: "", addr1: "" }, // 모달창에 표시될 내용
+      modalContent: { title: "", firstImage: "", contentId: "", contentTypeId: "", addr1: "", overview: "" }, // 모달창에 표시될 내용
       mapLoaded: false,
+      categories: {
+        12: "관광지",
+        14: "문화시설",
+        15: "축제공연",
+        25: "여행코스",
+        28: "레포츠",
+        32: "숙박",
+        38: "쇼핑",
+        39: "음식점",
+      },
     };
   },
   mounted() {
@@ -81,9 +93,44 @@ export default {
       }
     },
     addMarker(position, result) {
+      let markerImageUrl = "";
+
+      // 카테고리에 따라 마커 이미지 설정
+      switch (result.contentTypeId) {
+        case 12:
+          markerImageUrl = "https://ifh.cc/g/wM9f6X.png"; // 관광지
+          break;
+        case 14:
+          markerImageUrl = "https://ifh.cc/g/yt8lkS.png"; // 문화시설
+          break;
+        case 15:
+          markerImageUrl = "https://ifh.cc/g/y6gtDb.png"; // 축제공연
+          break;
+        case 25:
+          markerImageUrl = "https://ifh.cc/g/y6gtDb.png"; // 여행코스
+          break;
+        case 28:
+          markerImageUrl = "https://ifh.cc/g/KkgGRB.png"; // 레포츠
+          break;
+        case 32:
+          markerImageUrl = "https://ifh.cc/g/mkh7rM.png"; // 숙박
+          break;
+        case 38:
+          markerImageUrl = "https://ifh.cc/g/sDFN3X.png"; // 쇼핑
+          break;
+        case 39:
+          markerImageUrl = "https://ifh.cc/g/7kTAJ6.png"; // 음식점
+          break;
+      }
+
+      const imageSize = new window.kakao.maps.Size(30, 30); // 마커 이미지 크기
+      const markerImage = new window.kakao.maps.MarkerImage(markerImageUrl, imageSize);
+
       const marker = new window.kakao.maps.Marker({
         position: position,
+        image: markerImage, // 마커 이미지 설정
       });
+
       marker.setMap(this.map); // 마커를 지도에 추가
 
       // 커스텀 오버레이에 표시될 내용
@@ -102,10 +149,38 @@ export default {
       // 마커 클릭 이벤트 리스너 추가
       window.kakao.maps.event.addListener(marker, "click", () => {
         this.modalContent = { ...result }; // 모달창에 표시될 내용 업데이트
+        console.log(this.modalContent);
+        this.fetchAttractionDetails(result.contentId);
         this.showModal = true; // 모달창 표시
       });
 
       this.markers.push(marker);
+    },
+
+    fetchAttractionDetails(contentId) {
+      axios
+        .get(`http://localhost/api/attraction/list/${contentId}`)
+        .then((response) => {
+          this.modalContent = { ...this.modalContent, ...response.data }; // 기존 modalContent에 추가 정보를 병합
+          console.log(this.modalContent);
+        })
+        .catch((error) => {
+          console.error("There was an error fetching the attraction details:", error);
+        });
+    },
+
+    openNaver() {
+      // modalContent.title의 공백을 제거
+      const query = this.modalContent.title.replace(/\s+/g, "");
+      // 새 창으로 네이버 검색 결과 페이지 열기
+      window.open(`https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=${query}`);
+    },
+
+    openInsta() {
+      // modalContent.title의 공백을 제거
+      const query = this.modalContent.title.replace(/\s+/g, "");
+      // 새 창으로 네이버 검색 결과 페이지 열기
+      window.open(`https://www.instagram.com/explore/tags/${query}`);
     },
   },
 };
@@ -120,9 +195,19 @@ export default {
       <span class="close" @click="showModal = false">&times;</span>
       <p style="font-size: 25px">{{ modalContent.title }}</p>
       <img :src="modalContent.firstImage" alt="Image" />
-      <p>Content ID: {{ modalContent.contentId }}</p>
-      <p>Content Type ID: {{ modalContent.contentTypeId }}</p>
-      <p>Address: {{ modalContent.addr1 }}</p>
+      <!-- <p>Content ID: {{ modalContent.contentId }}</p> -->
+      <!-- <p>Content Type ID: {{ modalContent.contentTypeId }}</p>
+       -->
+      <div class="row">
+        <p style="color: #00bcd4; margin-left: 15px">{{ categories[modalContent.contentTypeId] }}</p>
+        <img src="@/assets/img/naver.png" style="width: 7%; margin-left: 5px; cursor: pointer" @click="openNaver" />
+        <img src="@/assets/img/Instagram.png" style="width: 7%; margin-left: 5px; cursor: pointer" @click="openInsta" />
+      </div>
+
+      <p><img src="@/assets/img/pin.png" style="width: 5%" />{{ modalContent.addr1 }}</p>
+      <br />
+
+      <p style="font-size: 11px" v-if="modalContent.overview">{{ modalContent.overview }}</p>
     </div>
   </div>
 </template>
@@ -154,6 +239,8 @@ p {
   padding: 20px;
   border: 1px solid #888;
   width: 40%; /* 모달 내용의 너비 */
+  max-height: 60%;
+  overflow-y: auto;
 }
 
 .close {
