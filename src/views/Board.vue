@@ -67,13 +67,16 @@ a {
 }
 
 .title {
-  width: 20%; /* 제목 */
+  width: 25%; /* 제목 */
 }
 
 .author,
-.views,
-.date {
+.views {
   width: 10%; /* 글쓴이, 조회수, 작성일시 */
+}
+
+.date {
+  width: 15%;
 }
 
 @media all and (max-width: 768px) {

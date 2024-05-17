@@ -7,6 +7,7 @@ import Notice from "@/views/Notice.vue";
 import Board from "@/views/Board.vue";
 import Login from "@/views/Login.vue";
 import Promise from "@/views/Promise.vue";
+import Result from "@/components/main/SearchResult.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,11 @@ const router = createRouter({
       path: "/",
       name: "main",
       component: Main,
+    },
+    {
+      path: "/result",
+      name: "result",
+      component: Result,
     },
     {
       path: "/notice",

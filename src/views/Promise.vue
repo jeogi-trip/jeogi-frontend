@@ -70,9 +70,10 @@ export default {
       this.$refs.kakaoMap.map.setCenter(center);
 
       // 다른 이미지의 마커를 추가하기 위한 마커 이미지 정보
-      const imageSrc = "https://ifh.cc/g/6gWFKz.png"; // 마커 이미지의 주소입니다
-      const imageSize = new window.kakao.maps.Size(44, 50); // 마커 이미지의 크기입니다
-      const imageOption = { offset: new window.kakao.maps.Point(27, 69) }; // 마커 이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+      // const imageSrc = "https://ifh.cc/g/6gWFKz.png"; // 마커 이미지의 주소입니다
+      const imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+      const imageSize = new window.kakao.maps.Size(24, 35); // 마커 이미지의 크기입니다
+      const imageOption = { offset: new window.kakao.maps.Point(11, 32) }; // 마커 이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
       // 마커의 이미지 정보를 가지고 있는 마커 이미지를 생성합니다
       const markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
