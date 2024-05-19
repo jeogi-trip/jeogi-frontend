@@ -897,7 +897,7 @@ button:focus {
   box-shadow: 0 0 20px -7px rgba(0, 0, 0, 0.4);
 }
 
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
   .slicknav_menu {
     display: block;
     width: 100%;
@@ -929,7 +929,7 @@ button:focus {
   .top-nav-collapse .navbar-nav .nav-link {
     color: #9a9a9a !important;
   }
-}
+} */
 
 @media (max-width: 767px) {
   .sticky-menu {

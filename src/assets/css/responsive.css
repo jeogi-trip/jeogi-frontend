@@ -163,7 +163,8 @@
   .contact-right-area {
     margin-top: 30px;
   }
-  .full-time, .part-time {
+  .full-time,
+  .part-time {
     text-transform: capitalize;
     padding: 4px 12px;
   }
@@ -255,7 +256,8 @@
   #carousel-area .carousel-item .img-wrapper img {
     display: none;
   }
-  #carousel-area .carousel-control-next i, #carousel-area .carousel-control-prev i {
+  #carousel-area .carousel-control-next i,
+  #carousel-area .carousel-control-prev i {
     border: none;
   }
   .services-inner {
@@ -512,7 +514,8 @@
     padding: 7px 20px;
     margin-top: 20px;
   }
-  #carousel-area .carousel-control-next i, #carousel-area .carousel-control-prev i {
+  #carousel-area .carousel-control-next i,
+  #carousel-area .carousel-control-prev i {
     border: transparent !important;
   }
   .back-to-top {

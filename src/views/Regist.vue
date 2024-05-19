@@ -43,7 +43,7 @@ const moveMain = () => {
               <div class="form-group">
                 <div class="input-icon">
                   <i class="lni-lock"></i>
-                  <input type="text" class="form-control" placeholder="비밀번호를 입력하세요." />
+                  <input type="password" class="form-control" placeholder="비밀번호를 입력하세요." />
                 </div>
               </div>
               <br />
@@ -56,19 +56,25 @@ const moveMain = () => {
               <div class="form-group">
                 <div class="input-icon">
                   <i class="lni-calendar"></i>
-                  <input type="text" class="form-control" placeholder="생년월일를 입력하세요." />
+                  <input type="date" class="form-control" placeholder="생년월일를 입력하세요." />
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-icon">
                   <i class="lni-phone"></i>
-                  <input type="text" class="form-control" placeholder="전화번호를 입력하세요." />
+                  <input
+                    type="tel"
+                    class="form-control"
+                    placeholder="전화번호를 입력하세요."
+                    pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+                    title="전화번호 형식: 010-1234-5678"
+                  />
                 </div>
               </div>
               <div class="form-group">
                 <div class="input-icon">
                   <i class="lni-envelope"></i>
-                  <input type="text" class="form-control" placeholder="이메일을 입력하세요." />
+                  <input type="email" class="form-control" placeholder="이메일을 입력하세요." />
                 </div>
               </div>
 
