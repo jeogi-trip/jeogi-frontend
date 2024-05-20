@@ -1,9 +1,27 @@
 <script setup>
+import { ref } from "vue";
+import axios from "axios";
 import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 
 const router = useRouter();
-const moveMain = () => {
-  router.replace("/");
+const authStore = useAuthStore();
+
+const userId = ref("");
+const password = ref("");
+
+const signIn = async () => {
+  try {
+    await axios.post("http://localhost/api/auth/sign-in", {
+      userId: userId.value,
+      password: password.value,
+      auto: true,
+    });
+    authStore.login(userId.value);
+    router.replace("/");
+  } catch (error) {
+    alert("로그인 실패: " + error.message);
+  }
 };
 </script>
 
@@ -32,6 +50,7 @@ const moveMain = () => {
                 <div class="input-icon">
                   <i class="lni-user"></i>
                   <input
+                    v-model="userId"
                     type="text"
                     id="sender-email"
                     class="form-control"
@@ -43,14 +62,14 @@ const moveMain = () => {
               <div class="form-group">
                 <div class="input-icon">
                   <i class="lni-lock"></i>
-                  <input type="password" class="form-control" placeholder="비밀번호를 입력하세요." />
+                  <input v-model="password" type="password" class="form-control" placeholder="비밀번호를 입력하세요." />
                 </div>
               </div>
               <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1" />
                 <label class="form-check-label" for="exampleCheck1">아이디 저장</label>
               </div>
-              <button @click="moveMain" class="btn btn-common log-btn">로그인</button>
+              <button @click.prevent="signIn" class="btn btn-common log-btn">로그인</button>
             </form>
             <br />
             <ul class="row form-links justify-content-center">

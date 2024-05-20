@@ -1,4 +1,20 @@
-<script setup></script>
+<script setup>
+import { computed } from "vue";
+import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const authStore = useAuthStore();
+
+const isAuthenticated = computed(() => authStore.isAuthenticated);
+
+const performLogout = () => {
+  authStore.logout(); // 로그아웃 액션 호출
+  alert("로그아웃 되었습니다."); // 사용자에게 알림
+  router.replace("/");
+};
+</script>
 <template>
   <div>
     <header id="home" class="hero-area">
@@ -75,11 +91,18 @@
                     </li>
                   </ul>
                 </li>
-                <li class="nav-item" :class="{ active: $route.path === '/login' }">
+                <li v-if="!isAuthenticated" class="nav-item" :class="{ active: $route.path === '/login' }">
                   <RouterLink class="nav-link" to="/login">로그인</RouterLink>
                 </li>
-                <li class="nav-item" :class="{ active: $route.path === '/regist' }">
+                <li v-if="!isAuthenticated" class="nav-item" :class="{ active: $route.path === '/regist' }">
                   <RouterLink class="nav-link" to="/regist">회원가입</RouterLink>
+                </li>
+                <li v-if="isAuthenticated" class="nav-item">
+                  <!-- <RouterLink class="nav-link" @click="performLogout">로그아웃</RouterLink> -->
+                  <a class="nav-link" @click.prevent="performLogout">로그아웃</a>
+                </li>
+                <li v-if="isAuthenticated" class="nav-item" :class="{ active: $route.path === '/regist' }">
+                  <RouterLink class="nav-link" to="/regist">마이페이지</RouterLink>
                 </li>
 
                 <!-- <li class="button-group">
