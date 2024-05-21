@@ -6,6 +6,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const userId = ref(localStorage.getItem("userId") || "");
 const password = ref("");
+const confirmPassword = ref("");
 const email = ref("");
 const name = ref("");
 const phone = ref("");
@@ -21,12 +22,11 @@ const fetchUserInfo = async () => {
     const response = await axios.get(`http://localhost/api/user/${userId.value}`);
     const userInfo = response.data;
     console.log(userInfo);
-    email.value = userInfo.email || ""; // 이메일 값이 없으면 빈 문자열로 설정
+    email.value = userInfo.email || "";
     name.value = userInfo.name;
     phone.value = userInfo.phone;
-    birth.value = userInfo.birth; // 서버에서 'YYYY-MM-DD' 형식으로 반환되어야 합니다.
+    birth.value = userInfo.birth;
 
-    // 이메일이 없는 경우 fetchUserInfo2 호출
     if (!email.value) {
       await fetchUserInfo2();
     }
@@ -46,7 +46,6 @@ const fetchUserInfo2 = async () => {
     const users = response.data;
     console.log(users);
 
-    // 배열인지 확인
     if (Array.isArray(users)) {
       const user = users.find((u) => u.userId === userId.value);
       if (user) {
@@ -62,8 +61,17 @@ const fetchUserInfo2 = async () => {
   }
 };
 
-// 사용자 정보 수정 함수
 const updateUser = async () => {
+  if (!password.value) {
+    alert("비밀번호를 입력해 주세요.");
+    return;
+  }
+
+  if (password.value !== confirmPassword.value) {
+    alert("비밀번호가 일치하지 않습니다.");
+    return;
+  }
+
   try {
     console.log({
       userId: userId.value,
@@ -83,10 +91,34 @@ const updateUser = async () => {
       birth: birth.value,
     });
     alert("회원 정보가 성공적으로 수정되었습니다.");
-    // 수정 성공 후 필요한 로직 추가(예: 페이지 리다이렉션)
+    await router.push("/"); // router.push가 완료된 후에 새로고침을 수행합니다.
+    window.location.reload(); // 페이지 새로고침
   } catch (error) {
     console.error("회원 정보 수정에 실패했습니다.", error);
     alert("회원 정보 수정에 실패했습니다.");
+  }
+};
+
+const deleteUser = async () => {
+  if (!userId.value) {
+    alert("유효한 사용자 ID가 필요합니다.");
+    return;
+  }
+
+  const confirmDeletion = confirm("정말로 탈퇴하시겠습니까?");
+  if (!confirmDeletion) {
+    return;
+  }
+
+  try {
+    await axios.delete(`http://localhost/api/user/${userId.value}`);
+    console.log(userId.value);
+    alert("회원 탈퇴가 성공적으로 처리되었습니다.");
+    // 탈퇴 성공 후, 메인 페이지로 리다이렉션합니다.
+    window.location.href = "/";
+  } catch (error) {
+    console.error("회원 탈퇴에 실패했습니다.", error);
+    alert("회원 탈퇴에 실패했습니다.");
   }
 };
 
@@ -137,7 +169,7 @@ onMounted(fetchUserInfo);
               <div class="form-group">
                 <div class="input-icon">
                   <i class="lni-lock"></i>
-                  <input type="password" class="form-control" placeholder="비밀번호 확인!" />
+                  <input type="password" class="form-control" placeholder="비밀번호 확인!" v-model="confirmPassword" />
                 </div>
               </div>
               <br />
@@ -180,6 +212,7 @@ onMounted(fetchUserInfo);
               </div>
 
               <button class="btn btn-common log-btn">회원정보 수정</button>
+              <p style="float: right; cursor: pointer; font-family: 'neon'" @click="deleteUser">탈퇴하기</p>
             </form>
             <br />
           </div>

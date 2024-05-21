@@ -6,66 +6,59 @@
         <div class="row">
           <div class="col-lg-3 col-md-3 col-xs-12">
             <div class="widget">
-              <div class="footer-logo"></div>
-              <div class="textwidget">
-                <p>footer</p>
-              </div>
+              <div class="textwidget"></div>
             </div>
           </div>
-          <!-- <div class="col-lg-6 col-md-4 col-xs-12">
-            <div class="widget">
-              <h3 class="block-title">Quick Links</h3>
-              <ul class="menu">
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Support</a></li>
-                <li><a href="#">License</a></li>
-                <li><a href="#">Contact</a></li>
-              </ul>
-              <ul class="menu">
-                <li><a href="#">Terms &amp; Conditions</a></li>
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">Refferal Terms</a></li>
-                <li><a href="#">Product License</a></li>
-              </ul>
-            </div>
-          </div> -->
-          <!-- <div class="col-lg-3 col-md-4 col-xs-12">
-            <div class="widget">
-              <h3 class="block-title">Subscribe Now</h3>
-              <p>Sed consequat sapien faus quam bibendum convallis.</p>
-              <form method="post" id="subscribe-form" name="subscribe-form" class="validate">
-                <div class="form-group is-empty">
-                  <input
-                    type="email"
-                    value=""
-                    name="Email"
-                    class="form-control"
-                    id="EMAIL"
-                    placeholder="Enter Email..."
-                    required=""
-                  />
-                  <button type="submit" name="subscribe" id="subscribes" class="btn btn-common sub-btn">
-                    <i class="lni-envelope"></i>
-                  </button>
-                  <div class="clearfix"></div>
+          <footer class="css-9qom1h">
+            <div class="css-1fgyqqx">
+              <div class="css-c0kwb1">
+                <div class="css-1vuxzqq">
+                  <p class="css-1gnon5j" style="font-family: 'neon'; color: black; font-size: 20px">고객센터</p>
+                  <div class="css-19umuyy">
+                    <span class="css-nmy3yi">잠 잘때 빼고 운영</span>
+                    <div class="css-n975cn">
+                      <div class="css-knq94i">
+                        <button class="gc-box-button css-a1gmol" type="button">
+                          <span class="css-12z0wuy"></span><span><i class="lni-phone"></i> 010-4677-9695</span>
+                        </button>
+                        <br />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </form>
-              <ul class="mt-3 footer-social">
-                <li>
-                  <a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
-                </li>
-                <li>
-                  <a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>
-                </li>
-                <li>
-                  <a class="linkedin" href="#"><i class="lni-linkedin-fill"></i></a>
-                </li>
-                <li>
-                  <a class="google-plus" href="#"><i class="lni-google-plus"></i></a>
-                </li>
-              </ul>
+              </div>
+              <br />
+              <div class="css-e4bi2j">
+                <div class="css-3vdfrz">
+                  <div>
+                    <p class="css-1k8ervc">(주)저기어때컴퍼니</p>
+                    <p class="css-1k8ervc">
+                      주소 : 대전광역시 유성구 동서대로 98-39 | 대표이사 : 김태균 | 사업자등록번호 : ###-##-#####
+                    </p>
+                    <p class="css-1k8ervc">
+                      전자우편주소 : dnjstjr428@naver.com | 전화번호 : 010-4677-9695, 010-8301-4988 |
+                      호스팅서비스제공자의 상호 표시 : (주)저기어때컴퍼니
+                    </p>
+                  </div>
+                  <div class="css-qy85o2">
+                    <div class="css-1n7awt3">
+                      <a role="link" aria-disabled="false" target="_blank" class="css-c7u1xc" href="#"
+                        ><span>이용약관&nbsp;&nbsp;&nbsp;</span></a
+                      ><a role="link" aria-disabled="false" target="_blank" class="css-1y4w1hc" href="#"
+                        ><span>개인정보처리방침&nbsp;&nbsp;&nbsp;</span></a
+                      >
+                      <a role="link" aria-disabled="false" target="_blank" class="css-c7u1xc" href="#"
+                        ><span>소비자 분쟁해결 기준&nbsp;&nbsp;&nbsp;</span></a
+                      ><a role="link" aria-disabled="false" target="_blank" class="css-c7u1xc" href="#"
+                        ><span>콘텐츠산업진흥법에 의한 표시</span></a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <p class="css-1k8ervc">Copyright JEOGI COMPANY Corp. All rights reserved.</p>
+              </div>
             </div>
-          </div> -->
+          </footer>
         </div>
       </div>
     </section>
@@ -79,7 +72,7 @@
             <div class="site-info text-center">
               <p>
                 Designed and Developed by
-                <a href="https://uideck.com" rel="nofollow">원석 & 태균</a>
+                <a href="" rel="nofollow">원석 & 태균</a>
               </p>
             </div>
           </div>

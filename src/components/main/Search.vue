@@ -55,7 +55,7 @@ const search = () => {
               <h2 class="head-title">여기말고 저기어때</h2>
               <p style="font-size: 20px">원하는 관광지의 카테고리를 검색하세요~</p>
               <br />
-              <p>by 최강 8팀 원석 태균</p>
+              <p>by 최강 1팀 원석 태균</p>
               <div class="job-search-form">
                 <form @submit.prevent="search">
                   <div class="row justify-content-center">

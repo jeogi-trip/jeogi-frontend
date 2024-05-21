@@ -18,7 +18,8 @@ const signIn = async () => {
       auto: true,
     });
     authStore.login(userId.value);
-    router.replace("/");
+    await router.replace("/");
+    window.location.reload(); // 페이지 새로고침
   } catch (error) {
     alert("로그인 실패: " + error.message);
   }
