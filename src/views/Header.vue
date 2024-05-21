@@ -1,10 +1,10 @@
 <script setup>
-import { computed } from "vue";
+import { ref, onMounted, computed } from "vue";
+import axios from "axios";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-
 const authStore = useAuthStore();
 
 const isAuthenticated = computed(() => authStore.isAuthenticated);
@@ -14,6 +14,27 @@ const performLogout = () => {
   alert("로그아웃 되었습니다."); // 사용자에게 알림
   router.replace("/");
 };
+
+// 사용자 이름을 저장할 상태
+const userName = ref("");
+
+// 사용자 정보를 가져오는 함수
+const fetchUserInfo = async () => {
+  const userId = localStorage.getItem("userId"); // localStorage에서 사용자 ID 가져오기
+  if (userId) {
+    try {
+      const response = await axios.get(`http://localhost/api/user/${userId}`);
+      userName.value = response.data.name; // API 응답으로부터 사용자 이름 설정
+    } catch (error) {
+      console.error("사용자 정보를 가져오는 데 실패했습니다:", error);
+    }
+  }
+};
+
+// 컴포넌트가 마운트되었을 때 사용자 정보를 가져옴
+onMounted(() => {
+  fetchUserInfo();
+});
 </script>
 <template>
   <div>
@@ -44,7 +65,10 @@ const performLogout = () => {
             </div>
             <div class="collapse navbar-collapse" id="main-navbar">
               <ul class="navbar-nav mr-auto w-100 justify-content-end">
-                <li class="nav-item" :class="{ active: $route.path === '/' }">
+                <!-- <li v-if="isAuthenticated" class="nav-item">
+                  <a class="nav-link">{{ userName }}님 환영합니다~</a>
+                </li> -->
+                <li class="nav-item" style="margin-left: 100px" :class="{ active: $route.path === '/' }">
                   <RouterLink class="nav-link" to="/">홈</RouterLink>
                 </li>
                 <li class="nav-item" :class="{ active: $route.path === '/notice' }">
@@ -63,31 +87,27 @@ const performLogout = () => {
                     aria-expanded="false"
                     to="/promise"
                   >
-                    약속잡기
+                    추가기능
                   </RouterLink>
                 </li>
-                <li class="nav-item dropdown">
+                <li v-if="isAuthenticated" class="nav-item dropdown">
                   <a
                     class="nav-link dropdown-toggle"
                     href="#"
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
+                    style="font-size: 17px"
                   >
-                    Blog
+                    {{ userName }}님 환영합니다~
                   </a>
                   <ul class="dropdown-menu">
-                    <li>
-                      <a class="dropdown-item" href="blog.html">Blog - Right Sidebar</a>
+                    <li v-if="isAuthenticated" class="nav-item" :class="{ active: $route.path === '/mypage' }">
+                      <RouterLink class="nav-link" to="/mypage">마이페이지</RouterLink>
                     </li>
-                    <li>
-                      <a class="dropdown-item" href="blog-left-sidebar.html">Blog - Left Sidebar</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="blog-full-width.html"> Blog full width</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="single-post.html">Blog Single Post</a>
+                    <li v-if="isAuthenticated" class="nav-item">
+                      <!-- <RouterLink class="nav-link" @click="performLogout">로그아웃</RouterLink> -->
+                      <a class="nav-link" @click.prevent="performLogout">로그아웃</a>
                     </li>
                   </ul>
                 </li>
@@ -96,13 +116,6 @@ const performLogout = () => {
                 </li>
                 <li v-if="!isAuthenticated" class="nav-item" :class="{ active: $route.path === '/regist' }">
                   <RouterLink class="nav-link" to="/regist">회원가입</RouterLink>
-                </li>
-                <li v-if="isAuthenticated" class="nav-item">
-                  <!-- <RouterLink class="nav-link" @click="performLogout">로그아웃</RouterLink> -->
-                  <a class="nav-link" @click.prevent="performLogout">로그아웃</a>
-                </li>
-                <li v-if="isAuthenticated" class="nav-item" :class="{ active: $route.path === '/regist' }">
-                  <RouterLink class="nav-link" to="/regist">마이페이지</RouterLink>
                 </li>
 
                 <!-- <li class="button-group">

@@ -6,6 +6,7 @@ import Footer from "@/views/Footer.vue";
 <template>
   <div>
     <Search />
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
   </div>
 </template>
 <style scoped></style>

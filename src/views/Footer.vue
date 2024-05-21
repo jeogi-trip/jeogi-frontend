@@ -6,18 +6,13 @@
         <div class="row">
           <div class="col-lg-3 col-md-3 col-xs-12">
             <div class="widget">
-              <div class="footer-logo">
-                <img src="../assets/img/logo-footer.png" alt="" />
-              </div>
+              <div class="footer-logo"></div>
               <div class="textwidget">
-                <p>
-                  Sed consequat sapien faus quam bibendum convallis quis in nulla. Pellentesque volutpat odio eget diam
-                  cursus semper.
-                </p>
+                <p>footer</p>
               </div>
             </div>
           </div>
-          <div class="col-lg-6 col-md-4 col-xs-12">
+          <!-- <div class="col-lg-6 col-md-4 col-xs-12">
             <div class="widget">
               <h3 class="block-title">Quick Links</h3>
               <ul class="menu">
@@ -33,8 +28,8 @@
                 <li><a href="#">Product License</a></li>
               </ul>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-xs-12">
+          </div> -->
+          <!-- <div class="col-lg-3 col-md-4 col-xs-12">
             <div class="widget">
               <h3 class="block-title">Subscribe Now</h3>
               <p>Sed consequat sapien faus quam bibendum convallis.</p>
@@ -70,7 +65,7 @@
                 </li>
               </ul>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>
