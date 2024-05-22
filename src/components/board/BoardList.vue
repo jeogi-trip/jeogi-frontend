@@ -4,7 +4,7 @@ import { useRouter } from "vue-router";
 import { listArticle } from "@/api/board.js";
 
 import BoardListItem from "@/components/board/BoardListItem.vue";
-import axios from "axios";
+import axiosInstance from "@/api/axiosInstance";
 
 const router = useRouter();
 
@@ -27,8 +27,8 @@ const param = ref({
 });
 
 onMounted(() => {
-  axios
-    .get("http://localhost/api/board/list")
+  axiosInstance
+    .get("/api/board/list")
     .then((response) => {
       console.log(response);
       articles.value = response.data.boardList;

@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import axios from "axios";
+import axiosInstance from "@/api/axiosInstance";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 
@@ -12,7 +12,7 @@ const password = ref("");
 
 const signIn = async () => {
   try {
-    await axios.post("http://localhost/api/auth/sign-in", {
+    await axiosInstance.post("/api/auth/sign-in", {
       userId: userId.value,
       password: password.value,
       auto: true,

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import axios from "axios";
+import axiosInstance from "@/api/axiosInstance";
 
 const route = useRoute();
 const router = useRouter();
@@ -11,7 +11,7 @@ console.log(boardId);
 const board = ref({});
 
 const viewArticle = (boardId) => {
-  axios.get("http://localhost/api/board/" + boardId).then((response) => {
+  axiosInstance.get("/api/board/" + boardId).then((response) => {
     console.log("글작성 후 확인");
     console.log(response);
     board.value = response.data;
@@ -29,7 +29,7 @@ function moveModify() {
 }
 
 const onDeleteBoard = () => {
-  axios.delete("http://localhost/api/board/" + boardId).then((response) => {
+  axiosInstance.delete("/api/board/" + boardId).then((response) => {
     console.log("글삭제 후 확인!!!");
     console.log(response);
     router.replace({ name: "board-list" });

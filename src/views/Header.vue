@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
-import axios from "axios";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
+import axiosInstance from "@/api/axiosInstance";
 
 const router = useRouter();
 const authStore = useAuthStore();
@@ -23,7 +23,7 @@ const fetchUserInfo = async () => {
   const userId = localStorage.getItem("userId"); // localStorage에서 사용자 ID 가져오기
   if (userId) {
     try {
-      const response = await axios.get(`http://localhost/api/user/${userId}`);
+      const response = await axiosInstance.get(`/api/user/${userId}`);
       userName.value = response.data.name; // API 응답으로부터 사용자 이름 설정
     } catch (error) {
       console.error("사용자 정보를 가져오는 데 실패했습니다:", error);

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import axios from "axios";
+import axiosInstance from "@/api/axiosInstance";
 
 const route = useRoute();
 const router = useRouter();
@@ -12,8 +12,8 @@ const title = ref("");
 const content = ref("");
 
 const fetchArticle = () => {
-  axios
-    .get(`http://localhost/api/board/${boardId.value}`)
+  axiosInstance
+    .get(`/api/board/${boardId.value}`)
     .then((response) => {
       const { title: fetchedTitle, content: fetchedContent } = response.data;
       title.value = fetchedTitle;
@@ -25,10 +25,10 @@ const fetchArticle = () => {
 fetchArticle();
 
 const modifyArticle = () => {
-  const addr = "http://localhost/api/board/" + boardId.value;
+  const addr = "/api/board/" + boardId.value;
 
   // 데이터를 요청 본문에 포함시켜 PUT 요청을 보냅니다.
-  axios
+  axiosInstance
     .put(addr, {
       boardId: boardId.value,
       userId: "ssafy",
@@ -36,7 +36,7 @@ const modifyArticle = () => {
       content: content.value,
     })
     .then(() => {
-      axios.get(addr).then((response) => {
+      axiosInstance.get(addr).then((response) => {
         console.log("글 수정 후 확인!!");
         console.log(response);
         moveList(); // 수정 성공 후 리스트 페이지로 이동

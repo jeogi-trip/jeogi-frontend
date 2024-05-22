@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import axios from "axios";
+import axiosInstance from "@/api/axiosInstance";
 import { useRouter } from "vue-router";
 
 // Vue Router 인스턴스를 사용합니다.
@@ -13,9 +13,9 @@ const content = ref("");
 // 게시글 등록 함수
 const writeArticle = () => {
   // 수정된 주소 - 예시로 localhost를 사용합니다. 실제 주소로 변경해주세요.
-  const addr = "http://localhost/api/board/regist";
+  const addr = "/api/board/regist";
 
-  axios
+  axiosInstance
     .post(addr, {
       userId: "ssafy",
       title: title.value,
@@ -25,7 +25,7 @@ const writeArticle = () => {
       // 수정된 axios.get 호출
       console.log(response.data.boardList[0].boardId);
       const boardId = response.data.boardList[0].boardId;
-      axios.get(`http://localhost/api/board/${boardId}`).then((response) => {
+      axiosInstance.get(`/api/board/${boardId}`).then((response) => {
         console.log("글작성 후 확인!!");
         console.log(response);
         moveList();

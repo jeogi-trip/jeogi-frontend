@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from "vue";
-import axios from "axios";
 import { useRouter } from "vue-router";
+import axiosInstance from "@/api/axiosInstance";
 
 const router = useRouter();
 
@@ -23,7 +23,7 @@ watch(selectedSido, async (newSido) => {
     selectedGugun.value = "none";
   } else {
     try {
-      const response = await axios.get(`http://localhost/api/attraction/sido/${newSido}`);
+      const response = await axiosInstance.get(`/api/attraction/sido/${newSido}`);
       console.log(response);
       guguns.value = response.data; // 응답 데이터를 소분류 데이터 배열에 할당
     } catch (error) {

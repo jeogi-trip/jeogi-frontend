@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import axios from "axios";
 import { useRouter } from "vue-router";
+import axiosInstance from "@/api/axiosInstance";
 
 const router = useRouter();
 const userId = ref(localStorage.getItem("userId") || "");
@@ -19,7 +19,7 @@ const fetchUserInfo = async () => {
     return;
   }
   try {
-    const response = await axios.get(`http://localhost/api/user/${userId.value}`);
+    const response = await axiosInstance.get(`/api/user/${userId.value}`);
     const userInfo = response.data;
     console.log(userInfo);
     email.value = userInfo.email || "";
@@ -42,7 +42,7 @@ const fetchUserInfo2 = async () => {
     return;
   }
   try {
-    const response = await axios.get("http://localhost/api/user/list");
+    const response = await axiosInstance.get("/api/user/list");
     const users = response.data;
     console.log(users);
 
@@ -82,7 +82,7 @@ const updateUser = async () => {
       birth: birth.value,
     });
 
-    await axios.put("http://localhost/api/user/", {
+    await axiosInstance.put("/api/user/", {
       userId: userId.value,
       password: password.value,
       email: email.value,
@@ -111,7 +111,7 @@ const deleteUser = async () => {
   }
 
   try {
-    await axios.delete(`http://localhost/api/user/${userId.value}`);
+    await axiosInstance.delete(`/api/user/${userId.value}`);
     console.log(userId.value);
     alert("회원 탈퇴가 성공적으로 처리되었습니다.");
     // 탈퇴 성공 후, 메인 페이지로 리다이렉션합니다.

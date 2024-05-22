@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import axios from "axios";
+import axiosInstance from "@/api/axiosInstance";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -22,7 +22,7 @@ const signUp = async () => {
   };
 
   try {
-    await axios.post("http://localhost/api/auth/sign-up", userData);
+    await axiosInstance.post("/api/auth/sign-up", userData);
     // 회원가입 성공 후 메인 페이지로 이동
     alert("회원가입이 완료되었습니다.");
     router.replace("/login");

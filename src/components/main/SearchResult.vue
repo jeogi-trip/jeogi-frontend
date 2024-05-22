@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
-import axios from "axios";
+import axiosInstance from "@/api/axiosInstance";
 
 import KakaoMap2 from "@/components/map/KakaoMapByResult.vue";
 
@@ -20,7 +20,7 @@ const fetchSearchResults = async () => {
 
     // selectedCategories 배열의 각 항목에 대해 요청을 반복
     for (let categoryId of selectedCategories) {
-      const response = await axios.get("http://localhost/api/attraction/list/search", {
+      const response = await axiosInstance.get("/api/attraction/list/search", {
         params: {
           sidoCode: selectedSido,
           gugunCode: selectedGugun,
