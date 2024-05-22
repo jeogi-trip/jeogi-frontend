@@ -41,6 +41,7 @@
                       호스팅서비스제공자의 상호 표시 : (주)저기어때컴퍼니
                     </p>
                   </div>
+                  <br />
                   <div class="css-qy85o2">
                     <div class="css-1n7awt3">
                       <a role="link" aria-disabled="false" href=""><span>이용약관&nbsp;&nbsp;&nbsp;</span></a
