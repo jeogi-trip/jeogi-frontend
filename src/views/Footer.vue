@@ -33,7 +33,8 @@
                   <div>
                     <p class="css-1k8ervc">(주)저기어때컴퍼니</p>
                     <p class="css-1k8ervc">
-                      주소 : 대전광역시 유성구 동서대로 98-39 | 대표이사 : 김태균 | 사업자등록번호 : ###-##-#####
+                      주소 : 대전광역시 유성구 동서대로 98-39 | 대표이사 : 김태균, 임원석 | 사업자등록번호 :
+                      ###-##-#####
                     </p>
                     <p class="css-1k8ervc">
                       전자우편주소 : dnjstjr428@naver.com | 전화번호 : 010-4677-9695, 010-8301-4988 |
@@ -42,16 +43,11 @@
                   </div>
                   <div class="css-qy85o2">
                     <div class="css-1n7awt3">
-                      <a role="link" aria-disabled="false" target="_blank" class="css-c7u1xc" href="#"
-                        ><span>이용약관&nbsp;&nbsp;&nbsp;</span></a
-                      ><a role="link" aria-disabled="false" target="_blank" class="css-1y4w1hc" href="#"
-                        ><span>개인정보처리방침&nbsp;&nbsp;&nbsp;</span></a
-                      >
-                      <a role="link" aria-disabled="false" target="_blank" class="css-c7u1xc" href="#"
+                      <a role="link" aria-disabled="false" href=""><span>이용약관&nbsp;&nbsp;&nbsp;</span></a
+                      ><a role="link" aria-disabled="false" href=""><span>개인정보처리방침&nbsp;&nbsp;&nbsp;</span></a>
+                      <a role="link" aria-disabled="false" href=""
                         ><span>소비자 분쟁해결 기준&nbsp;&nbsp;&nbsp;</span></a
-                      ><a role="link" aria-disabled="false" target="_blank" class="css-c7u1xc" href="#"
-                        ><span>콘텐츠산업진흥법에 의한 표시</span></a
-                      >
+                      ><a role="link" aria-disabled="false" href=""><span>콘텐츠산업진흥법에 의한 표시</span></a>
                     </div>
                   </div>
                 </div>
