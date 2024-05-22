@@ -3,10 +3,13 @@ defineProps({ article: Object });
 </script>
 
 <template>
-  <tr v-if="article.userId !== 'admin'" class="text-start">
+  <tr v-if="article.userId === 'admin'" class="text-start">
     <td scope="">{{ article.boardId }}</td>
     <td class="text-start">
-      <router-link :to="{ name: 'board-detail', params: { boardId: article.boardId } }" class="article-title link-dark">
+      <router-link
+        :to="{ name: 'notice-detail', params: { boardId: article.boardId } }"
+        class="article-title link-dark"
+      >
         {{ article.title }}
       </router-link>
     </td>

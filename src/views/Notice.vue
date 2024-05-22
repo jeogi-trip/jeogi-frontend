@@ -13,9 +13,7 @@
       </div>
     </div>
   </div>
-
-  <br /><br />
-  <h3 style="text-align: center; font-family: 'neon'">개발 중 ^^</h3>
+  <RouterView></RouterView>
 </template>
 
 <style scoped></style>

@@ -42,7 +42,7 @@ const writeArticle = () => {
 
 // 글 목록 페이지로 이동하는 함수
 function moveList() {
-  router.replace({ name: "board-list" });
+  router.replace({ name: "notice-list" });
 }
 </script>
 
@@ -52,7 +52,7 @@ function moveList() {
       <div class="" style="width: 1200px; border: 3px solid lightgray; border-radius: 10px">
         <div class="form-head" style="margin: 20px">
           <br />
-          <h4 class="title" style="font-size: 25px">게시글 등록하기</h4>
+          <h4 class="title" style="font-size: 25px; font-family: 'neon'">공지 등록하기</h4>
           <br />
           <table>
             <tr>
@@ -71,7 +71,9 @@ function moveList() {
           <div>
             <br />
             <!-- 등록 버튼에 writeArticle 함수를 연결합니다. -->
-            <button @click="writeArticle" style="font-size: 17px; float: right; margin-right: 10px">등록하기</button>
+            <button @click="writeArticle" style="font-size: 17px; float: right; margin-right: 10px; cursor: pointer">
+              등록하기
+            </button>
           </div>
         </div>
       </div>

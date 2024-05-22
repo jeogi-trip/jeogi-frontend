@@ -41,14 +41,14 @@ const modifyArticle = () => {
       axiosInstance.get(addr).then((response) => {
         console.log("글 수정 후 확인!!");
         console.log(response);
-        router.replace({ name: "board-detail" });
+        router.push({ name: "notice-detail" });
       });
     })
     .catch((error) => console.error("게시글 수정 에러:", error));
 };
 
 function moveList() {
-  router.replace({ name: "board-list" });
+  router.replace({ name: "notice-list" });
 }
 </script>
 
@@ -58,7 +58,7 @@ function moveList() {
       <div class="" style="width: 1200px; border: 3px solid lightgray; border-radius: 10px">
         <div class="form-head" style="margin: 20px">
           <br />
-          <h4 class="title" style="font-size: 25px">게시글 수정하기</h4>
+          <h4 class="title" style="font-size: 25px; font-family: 'neon'">공지 수정하기</h4>
           <br />
           <table>
             <tr>

@@ -78,6 +78,34 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: "/notice",
+      name: "notice",
+      component: Notice,
+      redirect: { name: "notice-list" },
+      children: [
+        {
+          path: "list",
+          name: "notice-list",
+          component: () => import("@/components/notice/NoticeList.vue"),
+        },
+        {
+          path: "detail/:boardId",
+          name: "notice-detail",
+          component: () => import("@/components/notice/NoticeDetail.vue"),
+        },
+        {
+          path: "write",
+          name: "notice-write",
+          component: () => import("@/components/notice/NoticeWrite.vue"),
+        },
+        {
+          path: "modify/:boardId",
+          name: "notice-modify",
+          component: () => import("@/components/notice/NoticeModify.vue"),
+        },
+      ],
+    },
   ],
 });
 
