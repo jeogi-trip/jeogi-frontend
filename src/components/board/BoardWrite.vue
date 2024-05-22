@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import axiosInstance from "@/api/axiosInstance";
 import { useRouter } from "vue-router";
 
@@ -10,6 +10,12 @@ const router = useRouter();
 const title = ref("");
 const content = ref("");
 
+const userId = ref("");
+onMounted(() => {
+  // 로컬 스토리지에서 userId 값을 가져옵니다.
+  userId.value = localStorage.getItem("userId");
+});
+
 // 게시글 등록 함수
 const writeArticle = () => {
   // 수정된 주소 - 예시로 localhost를 사용합니다. 실제 주소로 변경해주세요.
@@ -17,7 +23,7 @@ const writeArticle = () => {
 
   axiosInstance
     .post(addr, {
-      userId: "ssafy",
+      userId: userId.value,
       title: title.value,
       content: content.value,
     })
@@ -55,7 +61,7 @@ function moveList() {
             </tr>
             <tr>
               <th>작성자</th>
-              <td><input type="text" value="ssafy" readonly /></td>
+              <td><input type="text" v-model="userId" readonly /></td>
             </tr>
             <tr>
               <th>내용</th>

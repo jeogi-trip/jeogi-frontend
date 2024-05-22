@@ -9,6 +9,7 @@ const { boardId } = route.params;
 console.log(boardId);
 
 const board = ref({});
+const currentUserId = ref(localStorage.getItem("userId")); // 로컬스토리지에서 현재 사용자 ID 가져오기
 
 const viewArticle = (boardId) => {
   axiosInstance.get("/api/board/" + boardId).then((response) => {
@@ -55,6 +56,10 @@ const onDeleteBoard = () => {
               <td>{{ board.title }}</td>
             </tr>
             <tr>
+              <th>글쓴이</th>
+              <td>{{ board.userId }}</td>
+            </tr>
+            <tr>
               <th>조회수</th>
               <td>{{ board.viewCount }}</td>
             </tr>
@@ -64,8 +69,8 @@ const onDeleteBoard = () => {
             </tr>
           </table>
           <button class="nav-link" @click="moveList">목록</button>
-          <button class="nav-link" @click="onDeleteBoard">삭제</button>
-          <button class="nav-link" @click="moveModify">수정</button>
+          <button class="nav-link" v-if="board.userId === currentUserId" @click="onDeleteBoard">삭제</button>
+          <button class="nav-link" v-if="board.userId === currentUserId" @click="moveModify">수정</button>
           <br />
         </div>
       </div>

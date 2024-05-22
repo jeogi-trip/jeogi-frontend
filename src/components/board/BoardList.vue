@@ -7,6 +7,7 @@ import BoardListItem from "@/components/board/BoardListItem.vue";
 import axiosInstance from "@/api/axiosInstance";
 
 const router = useRouter();
+const isLoggedIn = ref(false);
 
 const selectOption = ref([
   { text: "검색조건", value: "" },
@@ -27,6 +28,8 @@ const param = ref({
 });
 
 onMounted(() => {
+  isLoggedIn.value = localStorage.getItem("userId") !== null;
+
   axiosInstance
     .get("/api/board/list")
     .then((response) => {
@@ -75,6 +78,7 @@ const moveWrite = () => {
           <!-- <c:choose> -->
           <!-- <c:when test="${not empty sessionScope.member}"> -->
           <RouterLink
+            v-if="isLoggedIn"
             class="nav-link"
             :to="{ name: 'board-write' }"
             style="font-size: 17px; float: right; margin: 10px; color: #00bcd4"

@@ -10,14 +10,16 @@ console.log(boardId.value);
 
 const title = ref("");
 const content = ref("");
+const userId = ref("");
 
 const fetchArticle = () => {
   axiosInstance
     .get(`/api/board/${boardId.value}`)
     .then((response) => {
-      const { title: fetchedTitle, content: fetchedContent } = response.data;
+      const { title: fetchedTitle, userId: fetchedUserId, content: fetchedContent } = response.data;
       title.value = fetchedTitle;
       content.value = fetchedContent;
+      userId.value = fetchedUserId;
     })
     .catch((error) => console.error("게시글 정보 불러오기 에러:", error));
 };
@@ -31,7 +33,7 @@ const modifyArticle = () => {
   axiosInstance
     .put(addr, {
       boardId: boardId.value,
-      userId: "ssafy",
+      userId: userId.value,
       title: title.value,
       content: content.value,
     })
@@ -70,7 +72,7 @@ function moveList() {
             <tr>
               <th>작성자</th>
               <td>
-                <input type="text" name="writer" value="ssafy" readonly style="color: gray" />
+                <input type="text" name="writer" v-model="userId" readonly style="color: gray" />
               </td>
             </tr>
             <tr>
