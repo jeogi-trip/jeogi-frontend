@@ -58,7 +58,7 @@ function moveList() {
       <div class="" style="width: 1200px; border: 3px solid lightgray; border-radius: 10px">
         <div class="form-head" style="margin: 20px">
           <br />
-          <h4 class="title" style="font-size: 25px">게시글 수정하기</h4>
+          <h4 class="title" style="font-size: 25px; font-family: 'neon'">게시글 수정하기</h4>
           <br />
           <table>
             <tr>

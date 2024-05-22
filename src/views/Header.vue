@@ -1,10 +1,11 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 import { useAuthStore } from "@/stores/auth";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import axiosInstance from "@/api/axiosInstance";
 
 const router = useRouter();
+const route = useRoute();
 const authStore = useAuthStore();
 
 const isAuthenticated = computed(() => authStore.isAuthenticated);
@@ -35,6 +36,10 @@ const fetchUserInfo = async () => {
 onMounted(() => {
   fetchUserInfo();
 });
+
+const isActive = (path) => {
+  return computed(() => route.matched.some((record) => record.path.startsWith(path))).value;
+};
 </script>
 <template>
   <div>
@@ -71,10 +76,10 @@ onMounted(() => {
                 <li class="nav-item" style="margin-left: 100px" :class="{ active: $route.path === '/' }">
                   <RouterLink class="nav-link" to="/">홈</RouterLink>
                 </li>
-                <li class="nav-item" :class="{ active: $route.path === '/notice' }">
+                <li class="nav-item" :class="{ active: isActive('/notice') }">
                   <RouterLink class="nav-link" to="/notice">공지사항</RouterLink>
                 </li>
-                <li class="nav-item" :class="{ active: $route.path === '/board' }">
+                <li class="nav-item" :class="{ active: isActive('/board') }">
                   <RouterLink class="nav-link" to="/board">자유게시판</RouterLink>
                 </li>
 

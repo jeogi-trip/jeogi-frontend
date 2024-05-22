@@ -1,5 +1,6 @@
 <script>
 import KakaoMap from "@/components/map/KakaoMap.vue";
+import axiosInstance from "@/api/axiosInstance";
 
 export default {
   name: "App",
@@ -83,6 +84,81 @@ export default {
       this.centerMarker = new window.kakao.maps.Marker({
         position: markerPosition,
         image: markerImage, // 마커 이미지 설정
+      });
+
+      // 여기에 클릭 이벤트 리스너를 추가합니다.
+      window.kakao.maps.event.addListener(this.centerMarker, "click", () => {
+        console.log("주변 관광지 조회");
+        const lat = this.averageLat.toFixed(6);
+        const lng = this.averageLng.toFixed(6);
+        console.log(lat, lng);
+
+        axiosInstance
+          .get("/api/attraction/test", {
+            params: {
+              mapxLat: lat,
+              mapyLon: lng,
+              range: 10,
+            },
+          })
+          .then((response) => {
+            console.log("추천 관광지 데이터:", response.data);
+
+            const attractions = response.data;
+            attractions.forEach((attraction) => {
+              const markerPosition = new kakao.maps.LatLng(attraction.latitude, attraction.longitude);
+
+              // 마커 이미지 설정
+              let markerImageUrl = "";
+              switch (attraction.contentTypeId) {
+                case 12:
+                  markerImageUrl = "https://ifh.cc/g/wM9f6X.png"; // 관광지
+                  break;
+                case 14:
+                  markerImageUrl = "https://ifh.cc/g/yt8lkS.png"; // 문화시설
+                  break;
+                case 15:
+                  markerImageUrl = "https://ifh.cc/g/y6gtDb.png"; // 축제공연
+                  break;
+                case 25:
+                  markerImageUrl = "https://ifh.cc/g/y6gtDb.png"; // 여행코스
+                  break;
+                case 28:
+                  markerImageUrl = "https://ifh.cc/g/KkgGRB.png"; // 레포츠
+                  break;
+                case 32:
+                  markerImageUrl = "https://ifh.cc/g/mkh7rM.png"; // 숙박
+                  break;
+                case 38:
+                  markerImageUrl = "https://ifh.cc/g/sDFN3X.png"; // 쇼핑
+                  break;
+                case 39:
+                  markerImageUrl = "https://ifh.cc/g/7kTAJ6.png"; // 음식점
+                  break;
+              }
+
+              // 마커 이미지 생성
+              const markerImage = new kakao.maps.MarkerImage(
+                markerImageUrl,
+                new kakao.maps.Size(30, 30) // 마커 이미지 크기
+              );
+
+              // 마커 생성
+              const marker = new kakao.maps.Marker({
+                position: markerPosition,
+                image: markerImage,
+                map: this.$refs.kakaoMap.map,
+              });
+
+              // 마커에 클릭 이벤트 추가 (선택 사항)
+              kakao.maps.event.addListener(marker, "click", () => {
+                alert(`${attraction.title} 클릭됨`); // 예: attraction.name이 관광지 이름이라고 가정
+              });
+            });
+          })
+          .catch((error) => {
+            console.error("데이터 가져오기 실패:", error);
+          });
       });
 
       // 마커가 지도 위에 표시되도록 설정합니다
