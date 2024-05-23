@@ -1,12 +1,13 @@
 <script setup>
-import Header from "@/views/Header.vue";
 import Search from "@/components/main/Search.vue";
-import Footer from "@/views/Footer.vue";
+import CurrentLocation from "@/components/main/CurrentLocation.vue";
 </script>
 <template>
   <div>
     <Search />
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br /><br />
+    <CurrentLocation />
+    <br /><br />
   </div>
 </template>
 <style scoped></style>

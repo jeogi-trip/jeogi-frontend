@@ -13,6 +13,7 @@
     "pinia": "^2.1.7",
     "v-lazy-image": "^2.1.1",
     "vue": "^3.4.21",
+    "vue-geolocation-api": "^0.1.21",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
