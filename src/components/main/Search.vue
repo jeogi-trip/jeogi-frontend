@@ -52,7 +52,7 @@ const search = () => {
         <div class="row space-100 justify-content-center">
           <div class="col-lg-10 col-md-12 col-xs-12">
             <div class="contents">
-              <h2 class="head-title">여기말고 저기어때</h2>
+              <h2 class="head-title" style="font-size: 40px">여기말고 저기어때</h2>
               <p style="font-size: 20px">원하는 관광지의 카테고리를 검색하세요~</p>
               <br />
               <p>by 최강 1팀 원석 태균</p>

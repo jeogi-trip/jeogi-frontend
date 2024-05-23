@@ -80,8 +80,8 @@ const openInsta = (attraction) => {
 <template>
   <div>
     <div v-if="latitude && longitude">
-      <p style="color: black; font-size: 20px">- 내 주변 관광지 추천</p>
-      현 위치 - 위도: {{ latitude }} / 경도: {{ longitude }}
+      <p style="color: black; font-size: 25px">- 내 주변 관광지 추천</p>
+      <p style="margin-left: 10px">현 위치 - 위도: {{ latitude }} / 경도: {{ longitude }}</p>
     </div>
     <div v-else>현 위치 정보 불러오는 중...</div>
   </div>
