@@ -92,7 +92,7 @@ const isActive = (path) => {
                     aria-expanded="false"
                     to="/promise"
                   >
-                    추가기능
+                    약속잡기
                   </RouterLink>
                 </li>
                 <li v-if="isAuthenticated" class="nav-item dropdown">
