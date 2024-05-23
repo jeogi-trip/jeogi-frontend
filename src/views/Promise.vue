@@ -221,8 +221,8 @@ export default {
 
 <template>
   <br />
-  <div class="container">
-    <div class="search-view">
+  <div class="row">
+    <div class="search-view" style="padding: 10px;">
       <p style="color: black; font-size: 30px; margin-top: 10px; font-family: 'neon'">약속잡기!</p>
       <p style="color: black; font-family: 'neon'">어디서 만날지 모르겠다면?!</p>
       <p style="color: black; font-size: 20px; margin-top: 10px; font-family: 'neon'">좌표를 생성해주세요</p>
@@ -282,6 +282,8 @@ export default {
 
 .search-view {
   flex: 2;
+  max-height: 700px;
+  overflow-y: auto;
 }
 
 .kakao-map {
