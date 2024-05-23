@@ -104,7 +104,7 @@ const openInsta = (attraction) => {
             @click="openInsta(attraction)"
           />
         </div>
-        <p style="color: black; font-size: 12px">
+        <p style="color: black; font-size: 11px">
           <img src="@/assets/img/pin.png" style="width: 6%" />{{ attraction.addr1 }}
         </p>
       </div>
