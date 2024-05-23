@@ -37,7 +37,7 @@ const nextNewsItem = () => {
 // 자동 전환을 위한 interval 설정
 let intervalId;
 onMounted(() => {
-  intervalId = setInterval(nextNewsItem, 5000); // 5초마다 실행
+  intervalId = setInterval(nextNewsItem, 3000); // 3초마다 실행
 });
 
 // 컴포넌트 언마운트 시 interval 해제
