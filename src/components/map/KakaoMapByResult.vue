@@ -1,5 +1,5 @@
 <script>
-import axios from "axios";
+import axiosInstance from "@/api/axiosInstance";
 
 export default {
   name: "KakaoMap2",
@@ -158,8 +158,8 @@ export default {
     },
 
     fetchAttractionDetails(contentId) {
-      axios
-        .get(`http://localhost/api/attraction/list/${contentId}`)
+      axiosInstance
+        .get(`/api/attraction/list/${contentId}`)
         .then((response) => {
           this.modalContent = { ...this.modalContent, ...response.data }; // 기존 modalContent에 추가 정보를 병합
           console.log(this.modalContent);

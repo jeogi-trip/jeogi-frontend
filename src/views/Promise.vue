@@ -13,9 +13,47 @@ export default {
       averageLat: null,
       averageLng: null,
       centerMarker: null,
+      showModal: false, // 모달창 표시 여부
+      modalContent: { title: "", firstImage: "", contentId: "", contentTypeId: "", addr1: "", overview: "" }, // 모달창에 표시될 내용
+      mapLoaded: false,
+      categories: {
+        12: "관광지",
+        14: "문화시설",
+        15: "축제공연",
+        25: "여행코스",
+        28: "레포츠",
+        32: "숙박",
+        38: "쇼핑",
+        39: "음식점",
+      },
     };
   },
   methods: {
+    fetchAttractionDetails(contentId) {
+      axiosInstance
+        .get(`/api/attraction/list/${contentId}`)
+        .then((response) => {
+          this.modalContent = { ...this.modalContent, ...response.data }; // 기존 modalContent에 추가 정보를 병합
+          console.log(this.modalContent);
+        })
+        .catch((error) => {
+          console.error("There was an error fetching the attraction details:", error);
+        });
+    },
+
+    openNaver() {
+      // modalContent.title의 공백을 제거
+      const query = this.modalContent.title.replace(/\s+/g, "");
+      // 새 창으로 네이버 검색 결과 페이지 열기
+      window.open(`https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=${query}`);
+    },
+
+    openInsta() {
+      // modalContent.title의 공백을 제거
+      const query = this.modalContent.title.replace(/\s+/g, "");
+      // 새 창으로 네이버 검색 결과 페이지 열기
+      window.open(`https://www.instagram.com/explore/tags/${query}`);
+    },
     addMarker() {
       const center = this.$refs.kakaoMap.map.getCenter();
       this.$refs.kakaoMap.addMarker(new window.kakao.maps.LatLng(center.getLat(), center.getLng()));
@@ -150,9 +188,22 @@ export default {
                 map: this.$refs.kakaoMap.map,
               });
 
+              // 커스텀 오버레이에 표시될 내용
+              const content = `<div class="customOverlay" style="padding:5px; color: black; background-color: white; border: 1px solid blue; font-size:12px;">${attraction.title}</div>`;
+
+              // 커스텀 오버레이 생성
+              const customOverlay = new window.kakao.maps.CustomOverlay({
+                position: markerPosition,
+                content: content,
+                yAnchor: 0, // 커스텀 오버레이가 표시될 Y 위치 조정 (기본값은 0.5)
+              });
+              customOverlay.setMap(this.$refs.kakaoMap.map);
+
               // 마커에 클릭 이벤트 추가 (선택 사항)
               kakao.maps.event.addListener(marker, "click", () => {
-                alert(`${attraction.title} 클릭됨`); // 예: attraction.name이 관광지 이름이라고 가정
+                this.modalContent = { ...attraction };
+                this.fetchAttractionDetails(attraction.contentId);
+                this.showModal = true; // 모달창 표시
               });
             });
           })
@@ -187,15 +238,43 @@ export default {
 
       <button @click="centerMapOnAverage" style="font-size: 15px">가운데로 모여라!</button>
       <p style="font-family: 'neon'" v-if="averageLat && averageLng">
-        평균 위도: {{ averageLat.toFixed(6) }}<br />
-        평균 경도: {{ averageLng.toFixed(6) }}
+        <!-- 평균 위도: {{ averageLat.toFixed(6) }}<br />
+        평균 경도: {{ averageLng.toFixed(6) }}<br /> -->
+        <p style="color: black">
+          노란 별 마커를 클릭하면<br />
+        주변 관광지를 확인할 수 있어요!
+        </p>
       </p>
     </div>
     <KakaoMap class="kakao-map" ref="kakaoMap" @updateMarkerPosition="handleMarkerPositionUpdate" />
   </div>
+  <div v-if="showModal" class="modal">
+    <div class="modal-content">
+      <span class="close" @click="showModal = false">&times;</span>
+      <p style="font-size: 25px; color: black">{{ modalContent.title }}</p>
+      <img :src="modalContent.firstImage" alt="Image" />
+      <!-- <p>Content ID: {{ modalContent.contentId }}</p> -->
+      <!-- <p>Content Type ID: {{ modalContent.contentTypeId }}</p>
+       -->
+      <div class="row">
+        <p style="color: #00bcd4; margin-left: 15px">{{ categories[modalContent.contentTypeId] }}</p>
+        <img src="@/assets/img/naver.png" style="width: 7%; margin-left: 5px; cursor: pointer" @click="openNaver" />
+        <img src="@/assets/img/Instagram.png" style="width: 7%; margin-left: 5px; cursor: pointer" @click="openInsta" />
+      </div>
+
+      <p style="color: black"><img src="@/assets/img/pin.png" style="width: 5%" />{{ modalContent.addr1 }}</p>
+      <br />
+
+      <p style="font-size: 11px; color: black" v-if="modalContent.overview">{{ modalContent.overview }}</p>
+    </div>
+  </div>
 </template>
 
 <style scoped>
+* {
+  font-family: "neon";
+}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -219,5 +298,45 @@ button {
   cursor: pointer;
   border-color: #05defb;
   border-radius: 5px;
+}
+
+.modal {
+  display: block; /* 모달을 화면에 표시 */
+  position: fixed; /* 모달을 화면 중앙에 고정 */
+  z-index: 1; /* 모달이 다른 요소들 위에 표시되도록 설정 */
+  left: 0;
+  top: 0;
+  width: 100%; /* 전체 너비 */
+  height: 100%; /* 전체 높이 */
+  overflow: auto; /* 내용이 넘칠 경우 스크롤 가능하도록 설정 */
+  background-color: rgb(0, 0, 0); /* 배경색 설정 */
+  background-color: rgba(0, 0, 0, 0.4); /* 약간의 투명도를 가진 검은색 */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 페이지 중앙에 위치 */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%; /* 모달 내용의 너비 */
+  max-height: 60%;
+  overflow-y: auto;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute; /* 절대 위치 지정 */
+  right: 10px; /* 오른쪽에서 10px 떨어진 곳에 위치 */
+  top: 10px; /* 상단에서 10px 떨어진 곳에 위치 */
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>
