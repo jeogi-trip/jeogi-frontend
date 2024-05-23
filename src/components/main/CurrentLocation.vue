@@ -86,7 +86,7 @@ const openInsta = (attraction) => {
     <div v-else>현 위치 정보 불러오는 중...</div>
   </div>
   <div class="carousel">
-    <button class="scroll-btn left" @click="scrollLeft">‹</button>
+    <button class="scroll-btn left" @click="scrollLeft"><</button>
     <div class="card-container">
       <div v-for="attraction in attractions" :key="attraction.title" class="card">
         <img :src="attraction.firstImage" style="width: 180px; height: 150px" alt="Image" />
@@ -109,7 +109,7 @@ const openInsta = (attraction) => {
         </p>
       </div>
     </div>
-    <button class="scroll-btn right" @click="scrollRight">›</button>
+    <button class="scroll-btn right" @click="scrollRight">></button>
   </div>
 </template>
 
@@ -149,11 +149,14 @@ const openInsta = (attraction) => {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #ddd;
+  background-color: #dcdcdc;
   border: none;
-  font-size: 24px;
+  font-size: 17px;
   cursor: pointer;
   z-index: 10;
+  width: 33px; /* 버튼의 너비를 늘립니다 */
+  height: 33px; /* 버튼의 높이를 늘립니다 */
+  border-radius: 20px; /* 버튼의 모서리를 둥글게 만듭니다 (너비와 높이의 절반) */
 }
 
 .left {
